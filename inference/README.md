@@ -41,6 +41,12 @@ The list of 15 languages include Indian-English, 2 Tibeto-Burman languages (Bodo
 cd inference
 sudo apt-get install libsndfile1-dev ffmpeg enchant
 ```
+
+If Ubuntu, install the following dependencies:
+```
+cd inference
+sudo apt-get install libsndfile1-dev ffmpeg enchant-2
+```
 (For any other OS, we wish you best of luck)  
 3. `pip install -r requirements-ml.txt requirements-utils.txt`  
 4. [Download the models from here](https://github.com/AI4Bharat/Indic-TTS/releases), place them inside a new folder named `checkpoints` and unzip them.  
