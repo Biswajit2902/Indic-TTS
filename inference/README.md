@@ -49,15 +49,41 @@ sudo apt-get install libsndfile1-dev ffmpeg enchant-2
 ```
 (For any other OS, we wish you best of luck)  
 3. `pip install -r requirements-ml.txt requirements-utils.txt`  
-4. [Download the models from here](https://github.com/AI4Bharat/Indic-TTS/releases), place them inside a new folder named `checkpoints` and unzip them.  
+4. [Download the models from here](https://github.com/AI4Bharat/Indic-TTS/releases), place them inside a new folder named `checkpoints` and unzip them.
+5. mkdir -pv models/v1 && cp -rvf checkpoints/{lang} models/v1/
 
 ### Running inference
 
 Check `sample.py` for usage.
 
 ### Hosting REST API server
+Note: 
+1. In server.py remove the languages you dont want or you didn't download
+2. If you are using cpu. make use_cuda=False
 
 ```
 pip install -r requirements-server.txt
-uvicorn server:api
+uvicorn server:api --port {port} --host 0.0.0.0
+```
+
+You are good to go now!
+
+```bash
+curl -X 'POST' \
+  'http://{host}:{port}/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "input": [
+    {
+      "source": "నా పేరు బిశ్వజిత్"
+    }
+  ],
+  "config": {
+    "language": {
+      "sourceLanguage": "te"
+    },
+    "gender": "female"
+  }
+}'
 ```
